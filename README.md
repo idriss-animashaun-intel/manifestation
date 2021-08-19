@@ -16,7 +16,6 @@ Ensure that your I drive is mapped to the location of product whose thermal reci
 #### Step 3
 Next open the Manifest Summary Tool.exe then press "y" and enter to install tool\
 ![image](https://gitlab.devtools.intel.com/ianimash/manifest-summary-toolkit/-/wikis/uploads/400d37bf87d65dca8969f71a418623c7/image.png)
-![image](https://gitlab.devtools.intel.com/ianimash/manifest-summary-toolkit/-/wikis/uploads/400d37bf87d65dca8969f71a418623c7/image.png)
 
 After installation there will be a new folder generated in the same file location as the exe\
 ![image](https://gitlab.devtools.intel.com/ianimash/manifest-summary-toolkit/-/wikis/uploads/81e8467665c6499ee52e7515f8f80bd0/image.png)
