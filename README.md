@@ -11,7 +11,7 @@ Download the tool from here: https://goto/manifesttool
 
 #### Step 2
 Ensure that your I drive is mapped to the location of product whose thermal recipe you want to summarise, see example below:
-https://gitlab.devtools.intel.com/ianimash/manifest-summary-toolkit/-/wikis/uploads/8a4fb8126c203b330895b1979ed19722/image.png
+![image](https://gitlab.devtools.intel.com/ianimash/manifest-summary-toolkit/-/wikis/uploads/8a4fb8126c203b330895b1979ed19722/image.png)
 
 #### Step 3
 Next open the Manifest Summary Tool.exe then press "y" and enter to install tool\
