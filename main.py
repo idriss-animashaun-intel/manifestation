@@ -8,6 +8,9 @@ from tkinter import Button
 from tkinter import ttk
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
+from tkinter import OptionMenu
+from tkinter import StringVar
+from tkinter import W
    
 
 
@@ -22,6 +25,7 @@ def find_manifest():
                     for recipe in item:
                         if "HANDLER" in recipe.get('type'):
                             end_path = recipe.get('directPath').replace('..\..\..\..\..','')
+                            end_path = end_path.replace('..\..\..\..','')
                             mani_mid = r'I:\recipe\1274'+ end_path
                             mani_path = ET.parse(mani_mid).getroot()
                             for sub_group in mani_path:
@@ -32,7 +36,12 @@ def find_manifest():
 
 
 def get_summary():
-    manifest = find_manifest()
+    location = loc_mani.get()
+
+    if location == "Manifest":
+        manifest = find_manifest()
+    else:
+        manifest = filename
     man_root = ET.parse(manifest).getroot()
 
     Parameters = ['TemperatureStacticSetPoint',
@@ -143,8 +152,12 @@ def get_summary():
 
     df['Control Set'] = df['Control Set'].str.replace('_', '')
 
-    paths = [filename, mani_mid, manifest]
-    path_names = ['Ulinc', 'Handler', 'Thermal Recipe']
+    if location == "Manifest":
+        paths = [filename, mani_mid, manifest]
+    else:
+        paths = ['none', 'none', manifest]
+    
+    path_names = ['Manifest', 'Handler', 'Thermal Recipe']
   
     df1 = DataFrame(path_names, columns =['File'])
     df1['Path']= paths
@@ -208,7 +221,7 @@ def select_file():
 
 ### Main Root
 root = Tk()
-root.title('Manifest Summary v1.00')
+root.title('Manifest Summary v1.01')
 
 
 mainframe = ttk.Frame(root, padding="60 50 60 50")
@@ -226,11 +239,14 @@ open_button = Button(
 
 open_button.grid(row = 0, column = 0)
 
-
-
-
 button_0 = Button(mainframe, text="Pull Manifest Summary", height = 1, width = 20, command = get_summary, bg = 'green', fg = 'white', font = '-family "SF Espresso Shack" -size 12')
 button_0.grid(row = 1, column = 0, rowspan = 2 )
+
+loc_mani = StringVar(mainframe)
+loc_mani.set("Manifest") # default value
+
+sel_prod = OptionMenu(mainframe, loc_mani, "Manifest", "Thermal Recipe")
+sel_prod.grid(row = 0, column = 1, sticky=W)
 
 ### Main loop
 root.mainloop()
