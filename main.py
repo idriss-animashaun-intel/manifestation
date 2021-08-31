@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 from pandas import DataFrame
 from pandas import ExcelWriter
 from pandas import to_numeric
-
+import os
 from tkinter import Tk
 from tkinter import Button
 from tkinter import ttk
@@ -199,7 +199,8 @@ def get_summary():
 
     # Close the Pandas Excel writer and output the Excel file.
     writer.save()
-
+    writer.close() #added to allow time for file lock to be released
+    os.system(r'"Manifest Summary.xlsx"')
 
 def select_file():
     global filename
