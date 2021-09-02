@@ -11,13 +11,17 @@ from tkinter.messagebox import showinfo
 from tkinter import OptionMenu
 from tkinter import StringVar
 from tkinter import W
-   
-
 
 
 def find_manifest():
     global mani_mid
     ulinc = ET.parse(filename).getroot()
+    temp = filename.split("/",20)
+    index = temp.index('recipe') + 2
+    start_path = ''
+    for i in range(0, index):
+        start_path += temp[i] + '\\'
+    start_path = start_path[:-1]
     for group in ulinc:
         if group.tag == 'ProcessSteps':
             for item in group:
@@ -26,7 +30,7 @@ def find_manifest():
                         if "HANDLER" in recipe.get('type'):
                             end_path = recipe.get('directPath').replace('..\..\..\..\..','')
                             end_path = end_path.replace('..\..\..\..','')
-                            mani_mid = r'I:\recipe\1274'+ end_path
+                            mani_mid = r'' + start_path + end_path
                             mani_path = ET.parse(mani_mid).getroot()
                             for sub_group in mani_path:
                                 if sub_group.tag == 'ComponentRecipe':
@@ -153,9 +157,9 @@ def get_summary():
     df['Control Set'] = df['Control Set'].str.replace('_', '')
 
     if location == "Manifest":
-        paths = [filename, mani_mid, manifest]
+        paths = [filename.replace('/','\\'), mani_mid, manifest]
     else:
-        paths = ['none', 'none', manifest]
+        paths = ['none', 'none', manifest.replace('/','\\')]
     
     path_names = ['Manifest', 'Handler', 'Thermal Recipe']
   
@@ -222,7 +226,7 @@ def select_file():
 
 ### Main Root
 root = Tk()
-root.title('Manifest Summary v1.01')
+root.title('Manifest Summary v1.02')
 
 
 mainframe = ttk.Frame(root, padding="60 50 60 50")
