@@ -50,16 +50,11 @@ def get_summary():
 
     Parameters = ['TemperatureStacticSetPoint',
     'Imod_Y',
-    'PIDSystemControl_P',
-    'PIDSystemControl_I',
-    'PIDSystemControl_D',
+    
     'PIDSystemControl_Eta',
     'TemperatureControlMode',
     'PVSource',
-    'TemperatureDynamicEnable',
-    'PIDIvac_Pc',
-    'PIDIvac_Ic',
-    'PIDIvac_Dc']
+    'TemperatureDynamicEnable',]
     
     exclude = '_for_Non-Cooling'
     exclude1 = 'SourceTH'
@@ -68,7 +63,7 @@ def get_summary():
     sp = []
     imody = []
     p = []
-    i = []
+    i_val = []
     d = []
     eta = []
     tcm = []
@@ -80,7 +75,7 @@ def get_summary():
     pid_ic = []
     pid_dc = []
 
-    list_all = [sp,imody,p,i,d,eta,tcm,pvs,tde,pid_dc,pid_ic,pid_pc]
+    list_all = [sp,imody,eta,tcm,pvs,tde]
     for i in range(0,len(Parameters)):
         parameter= Parameters[i]
         for group in man_root:
@@ -91,6 +86,24 @@ def get_summary():
                             if exclude1 not in item.get('name'):
                                 list_all[i].append(item.get('value'))
 
+    Parameters = ['PIDSystemControl_P',
+    'PIDSystemControl_I',
+    'PIDSystemControl_D',
+    'PIDIvac_Pc',
+    'PIDIvac_Ic',
+    'PIDIvac_Dc']
+
+    exclude3 = '_for_Non-Cooling'
+
+    list_all2 = [p,i_val,d,pid_pc,pid_ic,pid_dc]
+    for i in range(0,len(Parameters)):
+        parameter= Parameters[i]
+        for group in man_root:
+            if group.get('name') in block:
+                for item in group:
+                    if parameter in item.get('name'):
+                        if exclude3 not in item.get('name'):
+                            list_all2[i].append(item.get('value'))
 
     Parameters = ['PVSourceTH1', 'PVSourceTH2']
 
@@ -137,7 +150,7 @@ def get_summary():
     df['Imod_Y']=to_numeric(df['Imod_Y'])
     df['P']=p
     df['P']=to_numeric(df['P'])
-    df['I']=i
+    df['I']=i_val
     df['I']=to_numeric(df['I'])
     df['D']=d
     df['D']=to_numeric(df['D'])
@@ -177,24 +190,23 @@ def get_summary():
     worksheet = writer.sheets['Manifest Summary']
 
     # Add some cell formats.
-    format1 = workbook.add_format({'num_format': '#,##0.00'})
 
     worksheet.set_column('A:A', 15)
-    worksheet.set_column('B:B', 15, format1)
+    worksheet.set_column('B:B', 15)
     worksheet.set_column('C:C', 25)
     worksheet.set_column('D:D', 15)
-    worksheet.set_column('E:E', None, format1)
-    worksheet.set_column('F:F', None, format1)
-    worksheet.set_column('G:G', None, format1)
-    worksheet.set_column('H:H', None, format1)
-    worksheet.set_column('I:I', None, format1)
-    worksheet.set_column('J:J', 25, format1)
-    worksheet.set_column('K:K', 15, format1)
-    worksheet.set_column('L:L', 18, format1)
-    worksheet.set_column('M:M', 18, format1)
-    worksheet.set_column('N:N', 18, format1)
-    worksheet.set_column('O:O', 18, format1)
-    worksheet.set_column('P:P', 18, format1)
+    worksheet.set_column('E:E', None)
+    worksheet.set_column('F:F', None)
+    worksheet.set_column('G:G', None)
+    worksheet.set_column('H:H', None)
+    worksheet.set_column('I:I', None)
+    worksheet.set_column('J:J', 25)
+    worksheet.set_column('K:K', 15)
+    worksheet.set_column('L:L', 18)
+    worksheet.set_column('M:M', 18)
+    worksheet.set_column('N:N', 18)
+    worksheet.set_column('O:O', 18)
+    worksheet.set_column('P:P', 18)
 
     worksheet1 = writer.sheets['File Path']
 
@@ -226,7 +238,7 @@ def select_file():
 
 ### Main Root
 root = Tk()
-root.title('Manifest Summary v1.02')
+root.title('Manifest Summary v1.03')
 
 
 mainframe = ttk.Frame(root, padding="60 50 60 50")
