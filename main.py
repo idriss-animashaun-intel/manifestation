@@ -11,6 +11,8 @@ from tkinter.messagebox import showinfo
 from tkinter import OptionMenu
 from tkinter import StringVar
 from tkinter import W
+from tkinter import Label
+import webbrowser
 
 
 def find_manifest():
@@ -246,6 +248,16 @@ mainframe.grid(column=0, row=0, sticky=('news'))
 mainframe.columnconfigure(0, weight=3)
 mainframe.rowconfigure(0, weight=3)
 
+def callback(url):
+    webbrowser.open_new(url)
+
+link1 = Label(mainframe, text="Wiki: https://goto/manifestation", fg="blue", cursor="hand2")
+link1.grid(row = 0,column = 0, sticky=W, columnspan = 2)
+link1.bind("<Button-1>", lambda e: callback("https://goto/manifestation"))
+
+link2 = Label(mainframe, text="IT support contact: idriss.animashaun@intel.com", fg="blue", cursor="hand2")
+link2.grid(row = 1,column = 0, sticky=W, columnspan = 2)
+link2.bind("<Button-1>", lambda e: callback("https://outlook.com"))
 
 open_button = Button(
     mainframe,
@@ -254,16 +266,16 @@ open_button = Button(
     bg = 'blue', fg = 'white', font = '-family "SF Espresso Shack" -size 12'
 )
 
-open_button.grid(row = 0, column = 0)
+open_button.grid(row = 2, column = 0)
 
 button_0 = Button(mainframe, text="Pull Manifest Summary", height = 1, width = 20, command = get_summary, bg = 'green', fg = 'white', font = '-family "SF Espresso Shack" -size 12')
-button_0.grid(row = 1, column = 0, rowspan = 2 )
+button_0.grid(row = 3, column = 0, rowspan = 2 )
 
 loc_mani = StringVar(mainframe)
 loc_mani.set("Manifest") # default value
 
 sel_prod = OptionMenu(mainframe, loc_mani, "Manifest", "Thermal Recipe")
-sel_prod.grid(row = 0, column = 1, sticky=W)
+sel_prod.grid(row = 2, column = 1, sticky=W)
 
 ### Main loop
 root.mainloop()

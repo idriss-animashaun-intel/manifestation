@@ -1,0 +1,6 @@
+*.xlsx
+build
+__pycache__
+dist
+*.spec
+pyinstaller_manifestation.txt
