@@ -253,7 +253,7 @@ def callback(url):
 
 link1 = Label(mainframe, text="Wiki: https://goto/manifestation", fg="blue", cursor="hand2")
 link1.grid(row = 0,column = 0, sticky=W, columnspan = 2)
-link1.bind("<Button-1>", lambda e: callback("https://goto/manifestation"))
+link1.bind("<Button-1>", lambda e: callback("https://gitlab.devtools.intel.com/ianimash/manifest-summary-toolkit/-/wikis/Manifest-Summary-Tool"))
 
 link2 = Label(mainframe, text="IT support contact: idriss.animashaun@intel.com", fg="blue", cursor="hand2")
 link2.grid(row = 1,column = 0, sticky=W, columnspan = 2)
