@@ -13,6 +13,7 @@ from tkinter import StringVar
 from tkinter import W
 from tkinter import Label
 import webbrowser
+import Update_Launcher
 
 
 def find_manifest():
