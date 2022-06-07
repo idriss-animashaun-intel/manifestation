@@ -6,7 +6,7 @@ import time
 
 
 manifestation_master_directory = os.getcwd()
-manifestation_file = manifestation_master_directory+"\\manifestation.exe"
+manifestation_file = manifestation_master_directory+"\\Manifestation.exe"
 Old_manifestation_directory = manifestation_master_directory+"\\manifestation_exe-master"
 
 proxy_handler = urllib.request.ProxyHandler({'https': 'http://proxy-dmz.intel.com:912'})
@@ -24,7 +24,7 @@ def installation():
 
     src_dir = manifestation_master_directory + "\\manifestation-master"
     dest_dir = manifestation_master_directory
-    fn = os.path.join(src_dir, "manifestation.exe")
+    fn = os.path.join(src_dir, "Manifestation.exe")
     shutil.copy(fn, dest_dir)
 
     shutil.rmtree(manifestation_master_directory+"\\manifestation-master")
@@ -45,7 +45,7 @@ if os.path.isfile(manifestation_file):
     local_file_size = int(os.path.getsize(manifestation_file))
     # print(local_file_size)
 
-    url = 'https://github.com/idriss-animashaun-intel/manifestation/raw/master/manifestation.exe'
+    url = 'https://github.com/idriss-animashaun-intel/manifestation/raw/master/Manifestation.exe'
     f = urllib.request.urlopen(url)
 
     i = f.info()
